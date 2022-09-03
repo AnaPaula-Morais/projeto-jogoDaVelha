@@ -26,68 +26,127 @@ void imprimeMatriz (string matriz[3][3]){
     cout << endl;
 }
 
-bool ganhadorNaoGanha () {
-    return true; 
+bool temUmVencedor(string matriz[3][3]){
+    return  (matriz[0][0] == matriz[0][1] && matriz[0][1] == matriz[0][2]) || 
+            (matriz[1][0] == matriz[1][1] && matriz[1][1] == matriz[1][2]) ||
+            (matriz[2][0] == matriz[2][1] && matriz[2][1] == matriz[2][2]) ||
+            (matriz[0][0] == matriz[1][0] && matriz[1][0] == matriz[2][0]) ||
+            (matriz[0][1] == matriz[1][1] && matriz[1][1] == matriz[2][1]) ||
+            (matriz[0][2] == matriz[1][2] && matriz[1][2] == matriz[2][2]) ||
+            (matriz[0][2] == matriz[1][1] && matriz[1][1] == matriz[2][0]) ||
+            (matriz[0][0] == matriz[1][1] && matriz[1][1] == matriz[2][2]) ;
 }
 
-int main (){
 
-    int posicaoJogada = 0;
-    string matriz[3][3] = {"1","2","3","4","5","6","7","8","9"};
-    
+int main (){
     // imprime matriz
     // jogador 1 escolhe posição para jogar
     // imprime matriz
     // jogador 2 escolhe posição para jogar 
     // Isso se repete até que um jogador ganhe
+    
+    string matriz[3][3] = {"1","2","3","4","5","6","7","8","9"};
+    int posicaoJogada = 0;
+    string jogada = "X";
+    int contador = 0;
+    bool empate = true;
+    
 
     do{
         imprimeMatriz(matriz);
-        cout <<"Vai jogar [ x ] em qual posição?" << endl;
+        if(jogada == "X"){
+            cout <<"Jogador X digite o numero da posicao que quer jogar: " << endl;
+        }
+        else {
+            cout <<"Jogador O digite o numero da posicao que quer jogar: " << endl;
+        }
         cin  >> posicaoJogada;
-        cout << "O jogador jogou na posição " << posicaoJogada << endl;
-        system("clear");
-        
+        system("cls");
+
         if (posicaoJogada == 1){
-            cout << matriz[0][0] << endl;
-            matriz[0][0] = "X";
+            if (matriz[0][0] == "X" || matriz [0][0] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[0][0] = jogada;
+
+        }
         else if (posicaoJogada == 2){
-            cout << matriz[0][1] << endl;
-            matriz[0][1] = "X";
+            if (matriz[0][1] == "X" || matriz [0][1] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[0][1] = jogada;
+        }
         else if (posicaoJogada == 3){
-            cout << matriz[0][2] << endl;
-            matriz[0][2] = "X";
+            if (matriz[0][2] == "X" || matriz [0][2] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[0][2] = jogada;
+        }
         else if (posicaoJogada == 4){
-            cout << matriz[1][0] << endl;
-            matriz[1][0] = "X";
+            if (matriz[1][0] == "X" || matriz [1][0] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[1][0] = jogada;
+        }
         else if (posicaoJogada == 5){
-            cout << matriz[1][1] << endl;
-            matriz[1][1] = "X";
+            if (matriz[1][1] == "X" || matriz [1][1] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[1][1] = jogada;
+        }
         else if (posicaoJogada == 6){
-            cout << matriz[1][2] << endl;
-            matriz[1][2] = "X";
+            if (matriz[1][2] == "X" || matriz [1][2] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[1][2] = jogada;
+        }
           else if (posicaoJogada == 7){
-            cout << matriz[2][0] << endl;
-            matriz[2][0] = "X";
+            if (matriz[2][0] == "X" || matriz [2][0] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[2][0] = jogada;
+        }
         else if (posicaoJogada == 8){
-            cout << matriz[2][1] << endl;
-            matriz[2][1] = "X";
+            if (matriz[2][1] == "X" || matriz [2][1] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[2][1] = jogada;
+        }
         else if (posicaoJogada == 9){
-            cout << matriz[2][2] << endl;
-            matriz[2][2] = "X";
+            if (matriz[2][2] == "X" || matriz [2][2] == "O"){
+                cout << "Posicao ocupada, tente outra vez" << endl;
+                continue;
             }
+            matriz[2][2] = jogada;
+        }
+        
+        if(temUmVencedor(matriz) ){
+            cout << "Parabens o jogador \"" << jogada << "\" venceu!!" << endl;
+            empate = false;
+            break;
+        }
 
+        if (jogada == "X"){
+            jogada = "O";
+        }else {
+            jogada = "X";
+        }
+        contador++;        
 
-    }while (ganhadorNaoGanha());
-       
+    } while (contador < 9);
+
+    
+    if (empate){
+        cout << "Fim de jogo - Ninguem venceu!";
+    }
    
 }
 
