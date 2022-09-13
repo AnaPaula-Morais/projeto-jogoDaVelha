@@ -4,7 +4,9 @@
 #include <math.h>
 
 using namespace std;
-
+/* 
+apresenta a matriz na consola
+*/
 void imprimeMatriz (string matriz[3][3]){
     cout << "  ================================ " << endl;
     cout << "           Jogo da Velha           " << endl;
@@ -26,8 +28,12 @@ void imprimeMatriz (string matriz[3][3]){
     cout << endl;
 }
 
+/* 
+verifica se existe um vencedor, retorna true quando existe um
+vencedor e false quando não tem um vencedor
+*/
 bool temUmVencedor(string matriz[3][3]){
-
+            // verifica linhas
     return  (matriz[0][0] == matriz[0][1] && matriz[0][1] == matriz[0][2]) || 
             (matriz[1][0] == matriz[1][1] && matriz[1][1] == matriz[1][2]) ||
             (matriz[2][0] == matriz[2][1] && matriz[2][1] == matriz[2][2]) ||
@@ -41,8 +47,8 @@ bool temUmVencedor(string matriz[3][3]){
 }
 
 /*
-Verifica se a jogada é valida e se for válida faz a jogada
-retorna true quando a jogada for válida
+Verifica se a jogada é valida, 
+retornar true quando a jogada for válida,
 retorna false quando a jogada for inválida
 */
 bool realizaJogada(string matriz[3][3], int posicaoJogada, string jogada){
@@ -111,6 +117,7 @@ bool realizaJogada(string matriz[3][3], int posicaoJogada, string jogada){
             matriz[2][2] = jogada;
             return true;
         default:
+            cout << "Jogada inválida - Jogue outra vez!";
             return false;
             
     } 
@@ -118,12 +125,6 @@ bool realizaJogada(string matriz[3][3], int posicaoJogada, string jogada){
 }
 
 int main (){
-    // imprime matriz
-    // jogador 1 escolhe posição para jogar
-    // imprime matriz
-    // jogador 2 escolhe posição para jogar 
-    // Isso se repete até que um jogador ganhe
-    
     string matriz[3][3] = {"1","2","3","4","5","6","7","8","9"};
     int posicaoJogada = 0;
     string jogada = "X";
@@ -143,10 +144,11 @@ int main (){
         system("cls");
 
         bool jogadaValida = realizaJogada(matriz, posicaoJogada, jogada);
+        // se a jogada nao for válida, interrompe a execução e joga-se outra vez
         if(!jogadaValida) {
             continue;
         }
-        
+        // se existir um vencedor sai do loop
         if(temUmVencedor(matriz) ){
             cout << "Parabens o jogador \"" << jogada << "\" venceu!!" << endl;
             empate = false;
